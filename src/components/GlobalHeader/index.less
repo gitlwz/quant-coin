@@ -1,0 +1,126 @@
+.GlobalHeader.header {
+    overflow: hidden;
+    height: 64px;
+    padding: 0 12px 0 0;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    position: relative;
+    .ant-layout {
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+    .logo {
+        height: 64px;
+        line-height: 58px;
+        vertical-align: top;
+        display: inline-block;
+        padding: 0 0 0 24px;
+        cursor: pointer;
+        font-size: 20px;
+        img {
+            display: inline-block;
+            width: 30px;
+            vertical-align: middle;
+        }
+    }
+    .menu {
+        .anticon {
+            margin-right: 8px;
+        }
+        .ant-dropdown-menu-item {
+            width: 160px;
+        }
+    }
+    i.trigger {
+        font-size: 20px;
+        line-height: 64px;
+        cursor: pointer;
+        transition: all 0.3s, padding 0s;
+        padding: 0 24px;
+        &:hover {
+            background: @primary-1;
+        }
+    }
+}
+
+.RightContent-right {
+    float: right;
+    height: 100%;
+    .action {
+        cursor: pointer;
+        padding: 0 12px;
+        display: inline-block;
+        transition: all 0.3s;
+        height: 100%;
+        >i {
+            font-size: 16px;
+            color: @text-color;
+        }
+        &:hover,
+        & .ant-popover-open {
+            background: @primary-color;
+        }
+    }
+    .search {
+        padding: 0;
+        margin: 0 12px;
+        &:hover {
+            background: transparent;
+        }
+    }
+    .account {
+        .avatar {
+            margin: 18px 8px 20px 0;
+            vertical-align: middle;
+        }
+    }
+    .language-icon {
+        cursor: pointer;
+        height: 100%;
+        padding: 0 12px;
+        display: inline-block;
+        transition: all 0.3s;
+        font-size: 14px;
+        &:hover {
+            background: @primary-color;
+        }
+    }
+    .colormenu {
+        padding: 0 12px;
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            background: @primary-color;
+        }
+    }
+    .screenFull {
+        display: inline-block;
+        padding: 0 12px;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            background: @primary-color;
+        }
+    }
+}
+
+@media only screen and (max-width: @screen-md) {
+    .GlobalHeader.header {
+        .ant-divider-vertical {
+            vertical-align: unset;
+        }
+        .name {
+            display: none;
+        }
+        i.trigger {
+            padding: 0 12px;
+        }
+        .logo {
+            padding-right: 12px;
+            position: relative;
+        }
+    }
+}
