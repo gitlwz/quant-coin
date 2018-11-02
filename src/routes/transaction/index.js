@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import { GridContent } from "quant-ui";
+
+import TotalRight from "./totalRight";
+import InstrumentMarket from "./instrumentMarket";
+import InstrumentDetal from "./instrumentDetal";
+import RecentTrade from "./recentTrade";
+import OrderList from "./orderList";
 import Kline from "./kline";
 class Index extends Component {
     constructor(props) {
@@ -8,16 +14,31 @@ class Index extends Component {
     renderItem = (l) => {
         switch (l.i) {
             case "0":
-                return <span item={l}>0</span>
+                return <TotalRight item={l} />
                 break;
             case "1":
-                return <Kline item={l} />
+                return <Kline item={l}/>
                 break;
             case "2":
-                return <span item={l}>2</span>
+                return <RecentTrade item={l} />
                 break;
             case "3":
-                return <span item={l}>3</span>
+                return <InstrumentMarket item={l} />
+                break;
+            case "4":
+                return <InstrumentDetal item={l} />
+                break;
+            case "5":
+                return <span item={l}>5</span>
+                break;
+            case "6":
+                return <OrderList item={l} />
+                break;
+            case "7":
+                return <span item={l}>7</span>
+                break;
+            case "8":
+                return <span item={l}>8</span>
                 break;
         }
     }
@@ -26,7 +47,7 @@ class Index extends Component {
             <div>
                 <GridContent
                     name="icon-transaction"
-                    titles={["总权益", "永续xxx", "近期交易", "合约市场","合约明细","提交委托","委托列表","深度图","起个名字"]}
+                    titles={["总权益", "永续xxx", "近期交易", "合约市场", "合约明细", "提交委托", "委托列表", "深度图", "起个名字"]}
                     cols={{ lg: 24, md: 20, sm: 16, xs: 12, xxs: 8 }}
                     defaultLayouts={
                         {
