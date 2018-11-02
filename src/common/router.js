@@ -2,7 +2,7 @@
  * @Author: 刘文柱 
  * @Date: 2018-10-18 10:15:16 
  * @Last Modified by: 刘文柱
- * @Last Modified time: 2018-10-22 15:03:01
+ * @Last Modified time: 2018-11-02 09:43:27
  */
 import React, { createElement } from 'react';
 import { Spin } from 'quant-ui';
@@ -104,7 +104,18 @@ export const getRouterData = app => {
         '/': {
             component: dynamicWrapper(app, ['login'], () => import('../layouts/BasicLayout')),
         },
-        
+        '/home': {
+            component: dynamicWrapper(app, [], () => import('../routes/home')),
+        },
+        '/transaction': {
+            component: dynamicWrapper(app, [], () => import('../routes/transaction')),
+        },
+        '/account': {
+            component: dynamicWrapper(app, [], () => import('../routes/account')),
+        },
+        '/helpcenter': {
+            component: dynamicWrapper(app, [], () => import('../routes/helpcenter')),
+        },
 
 
         '/exception/403': {
