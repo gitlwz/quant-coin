@@ -40,7 +40,7 @@ class Index extends Component {
                 return <Depthchart item={l} />
                 break;
             case "8":
-                return <span item={l}>8</span>
+                return <UserOrder item={l}/>
                 break;
         }
     }
@@ -49,7 +49,7 @@ class Index extends Component {
             <div>
                 <GridContent
                     name="icon-transaction"
-                    titles={["总权益", "永续xxx", "近期交易", "合约市场", "合约明细", "提交委托", "委托列表", "深度图", "起个名字"]}
+                    titles={["总权益", "永续xxx", "近期交易", "合约市场", "合约明细", "提交委托", "委托列表", "深度图", ""]}
                     cols={{ lg: 24, md: 20, sm: 16, xs: 12, xxs: 8 }}
                     defaultLayouts={
                         {

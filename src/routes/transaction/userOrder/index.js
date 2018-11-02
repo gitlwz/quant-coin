@@ -3,62 +3,104 @@ import { Table, Tabs } from 'quant-ui';
 import "./index.less"
 const TabPane = Tabs.TabPane;
 const columns = [{
-    title: '价格',
-    dataIndex: 'price',
+    title: '合约',
+    dataIndex: 'instrument',
     align: 'center',
-    width: '25%',
 }, {
-    title: '目前仓位数量',
-    dataIndex: 'size',
+    title: '持仓方向',
+    dataIndex: 'position',
     align: 'center',
-    width: '25%',
 }, {
-    title: '总',
-    dataIndex: 'total',
+    title: '持仓量',
+    dataIndex: 'number',
     align: 'center',
-    width: '25%',
+}, {
+    title: '开仓均价',
+    dataIndex: 'openPrice',
+    align: 'center',
+}, {
+    title: '持仓均价',
+    dataIndex: 'positionPrice',
+    align: 'center',
+}, {
+    title: '持仓保证金',
+    dataIndex: 'positionMar',
+    align: 'center',
+}, {
+    title: '爆仓价',
+    dataIndex: 'positionBoom',
+    align: 'center',
+}, {
+    title: '未实现盈亏',
+    dataIndex: 'noRealice',
+    align: 'center',
+}, {
+    title: '已实现盈亏',
+    dataIndex: 'realice',
+    align: 'center',
+}, {
+    title: '平仓',
+    dataIndex: 'close',
+    align: 'center',
+    render: (record) => {
+        return <a>平仓</a>
+    }
 }];
 const data = [{
     key: '1',
-    price: '6666',
-    size: 32,
-    total: '15:12:12',
+    instrument: '6666',
+    position: 123,
+    number: 32,
+    openPrice: '15:12:12',
+    positionPrice: '15:12:12',
+    positionMar: '15:12:12',
+    positionBoom: '15:12:12',
+    noRealice: '15:12:12',
+    realice: '15:12:12',
+    close: '15:12:12',
 }, {
-    key: '2',
-    price: '7777',
-    size: 32,
-    total: '15:12:12',
-}, {
-    key: '3',
-    price: '6666',
-    size: 32,
-    total: '15:12:12',
-}, {
-    key: '4',
-    price: '7777',
-    size: 32,
-    total: '15:12:12',
-}, {
-    key: '5',
-    price: '6666',
-    size: 32,
-    total: '15:12:12',
+    key: '1',
+    instrument: '6666',
+    position: 123,
+    number: 32,
+    openPrice: '15:12:12',
+    positionPrice: '15:12:12',
+    positionMar: '15:12:12',
+    positionBoom: '15:12:12',
+    noRealice: '15:12:12',
+    realice: '15:12:12',
+    close: '15:12:12',
 }];
 class index extends Component {
     render() {
         return (
-            <div className = "userOrder">
+            <div className="userOrder">
                 <Tabs defaultActiveKey="1" animated={false}>
                     <TabPane tab="仓位" key="1">
                         <Table
-                            onRow={this.onRowGreen}
                             bordered columns={columns} dataSource={data} size="small"
                         />
                     </TabPane>
-                    <TabPane tab="当前委托" key="2">Content of Tab Pane 2</TabPane>
-                    <TabPane tab="历史委托" key="3">Content of Tab Pane 3</TabPane>
-                    <TabPane tab="已成交" key="4">Content of Tab Pane 3</TabPane>
-                    <TabPane tab="所有持仓" key="5">Content of Tab Pane 3</TabPane>
+                    <TabPane tab="当前委托" key="2">
+                        <Table
+                            bordered columns={columns} dataSource={data} size="small"
+                        />
+                    </TabPane>
+                    <TabPane tab="历史委托" key="3">
+                        <Table
+                            bordered columns={columns} dataSource={data} size="small"
+                        />
+                    </TabPane>
+                    <TabPane tab="已成交" key="4">
+                        <Table
+                            bordered columns={columns} dataSource={data} size="small"
+                        />
+                    </TabPane>
+                    <TabPane tab="所有持仓" key="5">
+                        <Table
+                            bordered columns={columns} dataSource={data} size="small"
+                        />
+                    </TabPane>
                 </Tabs>
             </div>
         )
