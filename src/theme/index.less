@@ -8,11 +8,83 @@
     width: 100%;
     margin: 40px 0 !important;
 }
+
 //立体动画
-.hover-shadow{
+.hover-shadow {
     transition: all .3s;
 }
-.hover-shadow:hover{
+
+.hover-shadow:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
 //end
+//滚动条样式
+/* 设置滚动条的样式 */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-button:start:increment,
+::-webkit-scrollbar-button:end:decrement {
+    display: none;
+}
+
+::-webkit-scrollbar-corner {
+    display: block;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: rgba(0, 0, 0, .15);
+}
+
+::-webkit-scrollbar-button:start {
+    width: 10px;
+    height: 10px;
+    background: none;
+}
+
+::-webkit-scrollbar-button:start:hover {
+    background: none;
+}
+
+::-webkit-scrollbar-button:start:active {
+    background: none;
+}
+
+::-webkit-scrollbar-button:end {
+    width: 10px;
+    height: 10px;
+    background: none;
+}
+
+::-webkit-scrollbar-button:end:hover {
+    background: none;
+}
+
+::-webkit-scrollbar-button:end:active {
+    background: none;
+}
