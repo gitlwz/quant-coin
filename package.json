@@ -22,6 +22,7 @@
     "dotenv-expand": "4.2.0",
     "dva": "^2.4.0",
     "dva-loading": "^2.0.5",
+    "echarts": "^4.2.0-rc.2",
     "enquire-js": "^0.2.1",
     "eslint": "5.6.0",
     "eslint-config-react-app": "^3.0.4",
