@@ -35,7 +35,7 @@ export class TVChartContainer extends React.PureComponent {
             container_id: this.props.containerId,
             library_path: this.props.libraryPath,
 
-            locale: getLanguageFromURL() || 'en',
+            locale: getLanguageFromURL() || 'zh',
             disabled_features: ['use_localstorage_for_settings'],
             enabled_features: ['study_templates'],
             charts_storage_url: this.props.chartsStorageUrl,
@@ -48,21 +48,6 @@ export class TVChartContainer extends React.PureComponent {
         };
         const tvWidget = new window.TradingView.widget(widgetOptions);
         this.tvWidget = tvWidget;
-
-        tvWidget.onChartReady(() => {
-            const button = tvWidget.createButton()
-                .attr('title', 'Click to show a notification popup')
-                .addClass('apply-common-tooltip')
-                .on('click', () => tvWidget.showNoticeDialog({
-                    title: 'Notification',
-                    body: 'TradingView Charting Library API works correctly',
-                    callback: () => {
-                        console.log('Noticed!');
-                    },
-                }));
-
-            button[0].innerHTML = 'Check API';
-        });
     }
 
     componentWillUnmount() {
