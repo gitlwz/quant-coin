@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { GridContent } from "quant-ui";
+import Kline from "./kline";
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +11,7 @@ class Index extends Component {
                 return <span item={l}>0</span>
                 break;
             case "1":
-                return <span item={l}>1</span>
+                return <Kline item={l} />
                 break;
             case "2":
                 return <span item={l}>2</span>
