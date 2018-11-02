@@ -11,8 +11,8 @@ class index extends Component {
         <div className = "content">
             <div className = "lineItem">
                 <span className="tooltipWrapper">
-                    <span className="key">价格来源</span>
-                    <span className="value">BitMEX 指数</span>
+                    <span className="key">24小时交易量</span>
+                    <span className="value">9311111313 USD</span>
                 </span>
             </div>
             <div className = "lineItem">

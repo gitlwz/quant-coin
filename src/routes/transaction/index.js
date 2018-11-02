@@ -8,6 +8,7 @@ import RecentTrade from "./recentTrade";
 import OrderList from "./orderList";
 import Kline from "./kline";
 import Depthchart from "./depthchart";
+import UserOrder from "./userOrder";
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +31,7 @@ class Index extends Component {
                 return <InstrumentDetal item={l} />
                 break;
             case "5":
-                return <span item={l}>5</span>
+                return <UserOrder item={l}/>
                 break;
             case "6":
                 return <OrderList item={l} />
