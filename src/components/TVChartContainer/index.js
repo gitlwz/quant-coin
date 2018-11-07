@@ -10,10 +10,10 @@ function getLanguageFromURL() {
 
 export class TVChartContainer extends React.PureComponent {
     static defaultProps = {
-        symbol: 'AAPL',
-        interval: 'D',
+        symbol: 'ADAZ18',
+        interval: '1',
         containerId: 'tv_chart_container',
-        datafeedUrl: 'https://demo_feed.tradingview.com',
+        datafeedUrl: 'http://localhost:3000/api/udf',
         libraryPath: '/charting_library/',
         chartsStorageUrl: 'https://saveload.tradingview.com',
         chartsStorageApiVersion: '1.1',

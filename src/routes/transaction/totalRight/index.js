@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import "./index.less";
-import { Input} from 'quant-ui';
-const Search = Input.Search;
 class index extends Component {
   render() {
     return (

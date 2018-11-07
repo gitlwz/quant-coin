@@ -27,62 +27,15 @@ const codeMessage = {
     503: $('服务不可用，服务器暂时过载或维护。'),
     504: $('网关超时。'),
 };
-const frameCodeMessage = {
-    101:$("无权限访问"),
-    102:$("访问版本不支持"),
-    103:$("会话失效"),
-    104:$("请求无对应服务"),
-    105:$("请求接口错误"),
-    106:$("返回对象无法做json对象转换"),
-    107:$("请求参数个数错误"),
-    108:$("请求参数类型错误"),
-    109:$("请求参数无法转换java对象"),
-    110:$("后台业务处理遇到未知错误"),
-    111:$("entity定义错误，没有主键Id"),
-    112:$("数据库无法获得连接"),
-    113:$("字段验证发生异常"),
-    114:$("服务访问过频"),
-}
 const requestHeader = {
-    'Accept': 'text/plain;',
+    'Accept': 'application/json;',
     'Content-Type': 'application/json',
     'mode': "cors",
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 }
 function parseJSON(response) {
     return response.json();
 }
 function checkStatus(response) {
-
-    let frameCode = response.headers.get('error_code');
-    if(!!frameCode){
-        if(frameCode == 100){
-            const error = new Error();
-            error.name = 401;
-            error.response = response;
-            throw error;
-        }
-
-        if(frameCode == 101){
-            const error = new Error();
-            error.name = 403;
-            error.response = response;
-            throw error;
-        }
-
-        if(frameCode < 200){
-            const errortext = frameCodeMessage[frameCode]
-            notification.error({
-                message: `${$("请求错误")} ${frameCode}: ${response.url}`,
-                description: errortext,
-            });
-            const error = new Error(errortext);
-            error.name = frameCode;
-            error.response = response;
-            throw error;
-        }
-    }
-    
     if (response.status >= 200 && response.status < 300) {
         return response;
     }
@@ -109,14 +62,9 @@ function request(url, newOptions,showMessage = true) {
         .then(checkStatus)
         .then(parseJSON)
         .then(data => {
-            if (data.errorCode == 0) {
+            if (!!data) {
                 let resData = data;
-                if (resData != '' && resData.data != '')
-                    resData.data = JSON.parse(resData.data)
                 return resData;
-            } else {
-                showMessage&&message.error(data.errorMsg)
-                return data
             }
         })
         .catch(e => {
@@ -159,10 +107,9 @@ function request(url, newOptions,showMessage = true) {
 
 function GET(url,params,showMessage) {
 
-    return request(url, {
-        method: "POST",
+    return request(url + "?" + stringify(params), {
+        method: "GET",
         headers:requestHeader,
-        body: stringify(params),
         credentials: 'include'
     },showMessage)
 }

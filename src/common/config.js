@@ -44,7 +44,7 @@ let enConfig = {
 }
 
 let config = zhConfig;
-if (language.getCurrentLanguage() == "en_US") {
+if (language.getCurrentLanguage() === "en_US") {
     config = enConfig;
 }
 export default config;

@@ -35,7 +35,7 @@ export function encrypt(a, b) {
     c = (e * c + f) % g;
     var j = "";
     var k = "";
-    for (var i = 0; i < a.length; i++) {
+    for (i = 0; i < a.length; i++) {
         j = parseInt(a.charCodeAt(i) ^ Math.floor((c / g) * 255));
         if (j < 16) {
             k += "0" + j.toString(16)
@@ -70,7 +70,7 @@ export function decrypt(a, b) {
     c = (e * c + f) % g;
     var j = "";
     var k = "";
-    for (var i = 0; i < a.length; i += 2) {
+    for (i = 0; i < a.length; i += 2) {
         j = parseInt(parseInt(a.substring(i, i + 2), 16) ^ Math.floor((c / g) * 255));
         k += String.fromCharCode(j);
         c = (e * c + f) % g

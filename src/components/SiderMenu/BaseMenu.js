@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-10-18 10:10:08 
  */
 import React, { PureComponent } from 'react';
-import { Layout, Menu, Icon } from 'quant-ui';
+import {  Menu, Icon } from 'quant-ui';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
 import { urlToList } from '../_utils/pathTools';
@@ -63,7 +63,6 @@ export default class SiderMenu extends PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { location } = this.props;
     }
 
     /**
@@ -208,7 +207,7 @@ export default class SiderMenu extends PureComponent {
     };
 
     render() {
-        const { logo, menuData, collapsed, onCollapse } = this.props;
+        const { menuData, collapsed } = this.props;
         const { openKeys } = this.state;
         const theme = 'dark';
 

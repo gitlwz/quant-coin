@@ -45,17 +45,20 @@ const data = [{
     total: '15:12:12',
 }];
 class index extends Component {
-    constructor(props) {
-        super(props)
-    }
-    onRowGreen = (record) => {
+    onRowGreen = (record,index) => {
         let className = "green";
+        if(index % 2 == 0){
+            className += " odd";
+        }
         return {
             className
         }
     }
-    onRowRed = (record) => {
+    onRowRed = (record,index) => {
         let className = "red";
+        if(index % 2 == 0){
+            className += " odd";
+        }
         return {
             className
         }
@@ -73,7 +76,10 @@ class index extends Component {
                 </div>
                 <Table
                     onRow={this.onRowGreen}
-                    bordered showHeader={false} pagination={false} columns={columns} dataSource={data} size="small"
+                    bordered showHeader={false} 
+                    pagination={false} 
+                    columns={columns} 
+                    dataSource={data} size="small"
                 />
                 <div className="positionSetting">
                     <span className="position">盘口档位设置</span>

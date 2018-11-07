@@ -115,6 +115,7 @@
       "node"
     ]
   },
+  "proxy": "https://www.bitmex.com",
   "babel": {
     "presets": [
       "react-app"

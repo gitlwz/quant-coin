@@ -108,7 +108,7 @@ export const getRouterData = app => {
             component: dynamicWrapper(app, [], () => import('../routes/home')),
         },
         '/transaction': {
-            component: dynamicWrapper(app, [], () => import('../routes/transaction')),
+            component: dynamicWrapper(app, ["recentTrade","instrument"], () => import('../routes/transaction')),
         },
         '/account': {
             component: dynamicWrapper(app, [], () => import('../routes/account')),
