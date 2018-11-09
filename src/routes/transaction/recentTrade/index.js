@@ -1,86 +1,60 @@
 import React, { Component } from 'react'
 import './index.less';
-import { Table } from 'quant-ui';
+import { Table,Icon } from 'quant-ui';
 import { connect } from 'dva';
 import moment from "moment";
-const columns = [{
-    title: 'price',
-    dataIndex: 'price',
-    align: 'center',
-    width: '25%',
-}, {
-    title: 'size',
-    dataIndex: 'size',
-    align: 'center',
-    width: '25%',
-}, {
-    title: 'timestamp',
-    dataIndex: 'timestamp',
-    align: 'center',
-    width: '25%',
-    render:(text) => {
-
-        return moment(text).format("HH:mm:ss");  
-    }
-}, {
-    title: 'side',
-    dataIndex: 'side',
-    align: 'center',
-    width: '25%',
-    render:(text) => {
-        if(text === "Buy"){
-            return <span>B</span>
-        }else{
-            return <span>S</span>
-        }
-    }
-}];
 class Index extends Component {
+    constructor(props) {
+        super(props);
+    }
     componentWillMount = () => {
         const { dispatch } = this.props;
         dispatch({
             type: "recentTrade/getTrade",
         })
     }
-    onRow = (record, index) => {
-        let className = "";
-        if(record.side === "Buy"){
-            className = "green"
-        }else{
-            className = "red"
-        }
-        if(index % 2 == 0){
-            className += " odd";
-        }
-        return {
-            className
-        }
-    }
     render() {
-        const { dataSource ,loading} = this.props;
+        const { dataSource } = this.props;
         return (
             <div className="recentTrade">
-                <Table
-                    onRow={this.onRow}
-                    bordered 
-                    loading={loading}
-                    pagination={false} 
-                    showHeader={false} 
-                    columns={columns} 
-                    rowKey="trdMatchID"
-                    dataSource={dataSource} 
-                    size="small"
-                />
+                <table cellspacing="0" rules="cols">
+                    <tbody>
+                        {dataSource.map((ele, index, arr) => {
+                            let className = "red " + ele.anite;
+                            if(ele.side == "Buy"){
+                                className = "green " + ele.anite
+                            }
+                            return (
+                                <tr className={className} key={ele.trdMatchID}>
+                                    <td >
+                                        <div>{ele.icon&&<Icon type={ele.icon} style={{marginRight:"4px"}} theme="outlined" />}{ele.price}</div>
+                                    </td>
+                                    <td className="" >
+                                        <div>{ele.size}</div>
+                                    </td>
+                                    <td className="">
+                                        <div>{moment(ele.timestamp).format("HH:mm:ss")}</div>
+                                    </td>
+                                    <td className="">
+                                        <div>{ele.side.slice(0, 1)}</div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+
+
+                    </tbody>
+                </table>
             </div>
         )
     }
 }
 
-export default connect(({recentTrade,loading}) => {
+export default connect(({ recentTrade, loading }) => {
     const { dataSource } = recentTrade
+    console.log("***********", recentTrade)
     return {
-        dataSource,
-        loading:!!loading.effects["recentTrade/getTrade"]
+        dataSource
     }
 })(
     Index

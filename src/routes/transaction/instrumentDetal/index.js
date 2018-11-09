@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Trend, Spin } from 'quant-ui';
+import { Icon, Spin } from 'quant-ui';
 import "./index.less";
 import { connect } from 'dva';
 class Index extends Component {
@@ -7,20 +7,20 @@ class Index extends Component {
         super(props)
     }
     componentWillMount = () => {
-        const { dispatch } = this.props;
-        dispatch({
-            type: "instrument/getInstrumentBySymbol",
-            payload: { symbol: "XBTUSD" }
-        })
+        // const { dispatch } = this.props;
+        // dispatch({
+        //     type: "instrument/getInstrumentBySymbol",
+        //     payload: { symbol: "XBTUSD" }
+        // })
     }
     render() {
         const { instrumentData, loading } = this.props;
-        let instrument = instrumentData[0] ? instrumentData[0] : {};
+        let instrument = instrumentData;
         return (
             <Spin spinning={loading}>
                 <div className="instrumentDetal">
-                    <div className="headPrice">
-                        <Trend flag="up">{instrument.lastPrice}</Trend>
+                    <div className={"headPrice "+instrument.icon}>
+                    {instrument.lastPrice}<Icon type={instrument.icon} theme="outlined" />
                     </div>
                     <div className="content">
                         <div className="lineItem">
@@ -32,7 +32,7 @@ class Index extends Component {
                         <div className="lineItem">
                             <span className="tooltipWrapper">
                                 <span className="key">BitMEX 指数 的价格</span>
-                                <span className="value">6355.68</span>
+                                <span className="value">{instrument.indicativeSettlePrice}</span>
                             </span>
                         </div>
                     </div>

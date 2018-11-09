@@ -10,7 +10,7 @@ function getLanguageFromURL() {
 
 export class TVChartContainer extends React.PureComponent {
     static defaultProps = {
-        symbol: 'ADAZ18',
+        symbol: 'XBTUSD',
         interval: '1',
         containerId: 'tv_chart_container',
         datafeedUrl: 'http://localhost:3000/api/udf',

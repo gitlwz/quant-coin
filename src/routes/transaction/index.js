@@ -15,21 +15,83 @@ import { connect } from 'dva';
 class Index extends Component {
     constructor(props) {
         super(props);
+        this.ws = null;
     }
-    componentWillMount = () =>{
-        this.ws = new webSocket("wss://www.bitmex.com/realtime",null,{});
-        this.ws.onopen = function (evt) {
+    componentWillMount = () => {
+        const { dispatch } = this.props;
+        this.ws = new webSocket("wss://www.bitmex.com/realtime", null, { breatheParams: "ping" });
+        this.ws.onopen = (evt) => {
+            this.ws.send(JSON.stringify({ op: "subscribe", args: [
+                "orderBookL2_25:XBTUSD","trade:XBTUSD",
+                "instrument:XBTUSD"] }));
         };
-        this.ws.onmessage = function (evt) {
+        this.ws.onmessage = ({data}) => {
+            
+            if (data !== "pong") {
+                let res = JSON.parse(data)
+                if(res.table === "orderBookL2_25"){
+                    if(res.action === "partial"){
+                        dispatch({
+                            type: "recentTrade/partial",
+                            payload:{
+                                depthData:res.data
+                            }
+                        })
+                    }
+                    if(res.action === "update"){
+                        dispatch({
+                            type: "recentTrade/update",
+                            payload:{
+                                updataData:res.data
+                            }
+                        })
+                    }
+                }else if(res.table === "trade"){
+                    // if(res.action === "partial"){
+                    //     dispatch({
+                    //         type: "recentTrade/save",
+                    //         payload:{
+                    //             dataSource:res.data
+                    //         }
+                    //     })
+                    // }
+                    if(res.action === "insert"){
+                        dispatch({
+                            type: "recentTrade/insert",
+                            payload:{
+                                dataSource:res.data
+                            }
+                        })
+                    }
+                }else if(res.table === "instrument"){
+                    if(res.action === "partial"){
+                        dispatch({
+                            type: "instrument/instrumentupdate",
+                            payload:{
+                                instrumentData:res.data[0]
+                            }
+                        })
+                    }
+                    if(res.action === "update"){
+                        dispatch({
+                            type: "instrument/instrumentupdate",
+                            payload:{
+                                instrumentData:res.data[0]
+                            }
+                        })
+                    }
+                }
+            }
+
         };
         this.ws.onclose = function (evt) {
         };
-        this.ws.onerror = function(){
+        this.ws.onerror = function () {
         }
-        this.ws.onconnecting = function(){
+        this.ws.onconnecting = function () {
         }
     }
-    componentWillUnmount = () =>{
+    componentWillUnmount = () => {
         this.ws.close();
     }
     renderItem = (l) => {
@@ -38,7 +100,7 @@ class Index extends Component {
                 return <TotalRight item={l} />
                 break;
             case "1":
-                return <Kline item={l}/>
+                return <Kline item={l} />
                 break;
             case "2":
                 return <RecentTrade item={l} />
@@ -59,13 +121,13 @@ class Index extends Component {
                 return <Depthchart item={l} />
                 break;
             case "8":
-                return <UserOrder item={l}/>
+                return <UserOrder item={l} />
                 break;
-            case "9":  
-                return <Perpetual item={l}/>
+            case "9":
+                return <Perpetual item={l} />
                 break;
             case "10":
-                return <PositionHold item={l}/>
+                return <PositionHold item={l} />
                 break;
         }
     }

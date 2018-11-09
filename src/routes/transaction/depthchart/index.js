@@ -70,54 +70,26 @@ class Index extends Component {
         this.myChart.setOption(option)
         this.resize = this.myChart.resize;
         window.addEventListener("resize", this.resize);
-        const { dispatch } = this.props;
-        dispatch({
-            type: "recentTrade/getDepth",
-        })
     }
     componentWillReceiveProps = (props) => {
-        const { depthData } = props;
-        let sellData = [];
-        let buyData = [];
-        let sellDataC = [];
-        let buyDataC = [];
-        depthData.filter((value) => {
-            if (value.side === "Buy") {
-                buyData.push([value.price, value.size]);
-                buyDataC.push([value.price, value.size]);
-            } else {
-                sellData.push([value.price, value.size]);
-                sellDataC.push([value.price, value.size]);
-            }
-        })
-        for (let i = 0; i < buyData.length; i++) {
-            for (let j = 0; j < i; j++) {
-                buyDataC[i][1] += buyData[j][1];
-            }
-        }
-        for (let i = sellData.length - 1; i >= 0; i--) {
-            for (let j = sellData.length - 1; j > i; j--) {
-                sellDataC[i][1] += sellData[j][1];
-            }
-        }
-        if (buyDataC.length > 0 && sellDataC.length > 0) {
+        const { buyData,sellData } = props;
+        if (buyData.length > 0 && sellData.length > 0) {
             let option = {
                 xAxis: {
-                    min: buyDataC[buyDataC.length - 1][0],
-                    max: sellDataC[0][0]
+                    min: buyData[buyData.length - 1].price,
+                    max: sellData[0].price
                 },
                 series: [
                     {
-                        data: buyDataC
+                        data: buyData.map((ele)=>([ele.price,ele.all]))
                     },
                     {
-                        data: sellDataC
+                        data: sellData.map((ele)=>([ele.price,ele.all]))
                     }
                 ]
             }
+            
             this.myChart.setOption(option);
-            this.resize = this.myChart.resize;
-            window.addEventListener("resize", this.resize);
         }
     }
     componentWillUnmount = () => {
@@ -132,9 +104,10 @@ class Index extends Component {
 }
 
 export default connect(({ recentTrade, loading }) => {
-    const { depthData } = recentTrade
+    const { buyData,sellData } = recentTrade
     return {
-        depthData,
+        buyData,
+        sellData,
         loading: !!loading.effects["recentTrade/getDepth"]
     }
 })(

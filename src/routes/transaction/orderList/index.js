@@ -1,92 +1,41 @@
 import React, { Component } from 'react'
 import './index.less';
-import { Table, Trend, Select } from 'quant-ui';
+import {Icon, Select } from 'quant-ui';
+import { connect } from 'dva';
+import BuyTable from "./buyTable";
+import SellTable from "./sellTable";
 const Option = Select.Option;
-const columns = [{
-    title: '价格',
-    dataIndex: 'price',
-    align: 'center',
-    width: '25%',
-}, {
-    title: '目前仓位数量',
-    dataIndex: 'size',
-    align: 'center',
-    width: '25%',
-}, {
-    title: '总',
-    dataIndex: 'total',
-    align: 'center',
-    width: '25%',
-}];
-const data = [{
-    key: '1',
-    price: '6666',
-    size: 32,
-    total: '15:12:12',
-}, {
-    key: '2',
-    price: '7777',
-    size: 32,
-    total: '15:12:12',
-}, {
-    key: '3',
-    price: '6666',
-    size: 32,
-    total: '15:12:12',
-}, {
-    key: '4',
-    price: '7777',
-    size: 32,
-    total: '15:12:12',
-}, {
-    key: '5',
-    price: '6666',
-    size: 32,
-    total: '15:12:12',
-}];
-class index extends Component {
-    onRowGreen = (record,index) => {
-        let className = "green";
-        if(index % 2 == 0){
-            className += " odd";
-        }
-        return {
-            className
+
+class Index extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            positionSetting: "10"
         }
     }
-    onRowRed = (record,index) => {
-        let className = "red";
-        if(index % 2 == 0){
-            className += " odd";
-        }
-        return {
-            className
-        }
+    onChange = (value) => {
+        this.setState({
+            positionSetting: value
+        })
     }
     render() {
+        const {icon, lastPrice} = this.props
         return (
             <div className="orderList">
-                <Table
-                    onRow={this.onRowRed}
-                    onHeaderRow={this.onHeaderRow}
-                    bordered pagination={false} columns={columns} dataSource={data} size="small"
-                />
-                <div className="headPrice">
-                    <Trend flag="up">6184.0</Trend>
+                <SellTable positionSetting={this.state.positionSetting}/>
+                <div className={"headPrice " +icon}>
+                   {lastPrice}<Icon type={icon}/>
                 </div>
-                <Table
-                    onRow={this.onRowGreen}
-                    bordered showHeader={false} 
-                    pagination={false} 
-                    columns={columns} 
-                    dataSource={data} size="small"
-                />
+                <BuyTable positionSetting={this.state.positionSetting}/>
                 <div className="positionSetting">
                     <span className="position">盘口档位设置</span>
-                    <Select defaultValue="1" style={{ width: 120 }}>
-                        <Option value="1">1</Option>
+                    <Select defaultValue="10" onChange={this.onChange} style={{ width: 120 }}>
                         <Option value="5">5</Option>
+                        <Option value="6">6</Option>
+                        <Option value="7">7</Option>
+                        <Option value="8">8</Option>
                         <Option value="9">9</Option>
+                        <Option value="10">10</Option>
                     </Select>
                 </div>
             </div>
@@ -94,4 +43,12 @@ class index extends Component {
     }
 }
 
-export default index
+export default connect(({instrument}) => {
+    const { instrumentData } = instrument
+    return {
+        icon:instrumentData.icon,
+        lastPrice:instrumentData.lastPrice,
+    }
+})(
+    Index
+)

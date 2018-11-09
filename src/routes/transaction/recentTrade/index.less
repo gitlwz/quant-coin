@@ -1,23 +1,45 @@
-.recentTrade{
+.recentTrade {
     height: 100%;
     background-color: white;
     padding: 5px;
-    .ant-table{
+    table {
+        background-color: white;
+        border-radius: 6px;
+        table-layout: fixed;
+        border: 1px solid #e8e8e8;
+        border-collapse: collapse;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        text-align: right;
         font-size: 12px;
+        tr:nth-child(even)>td {
+            background-color: rgba(195, 195, 195, 0.25);
+        }
+        tr:hover{
+            background: rgba(82, 179, 112, 0.3);
+        }
+        td{
+            padding-right: 6px;
+            white-space: nowrap;
+            word-break: normal;
+        }
+        td:last-child{
+            width: 10%;
+        }
+        .red{
+            color: #ae543b;
+        }
+        .green{
+            color: #3e8654;
+        }
+        .light{
+            animation: recentTrade-myfirst 0.8s;
+        }
     }
-    .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td{
-        padding: 2px 0;
-    }
-    .ant-table-small > .ant-table-content > .ant-table-body{
-        margin: 0;
-    }
-    .green{
-        color: #03c087;
-    }
-    .red{
-        color: #f55858;
-    }
-    .odd{
-        background-color: #f4f4f4;
+}
+@keyframes recentTrade-myfirst {
+    0% {
+        background: rgba(173, 169, 104, 0.4);
     }
 }

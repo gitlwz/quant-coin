@@ -46,7 +46,25 @@ export default {
             return {
                 ...state, ...payload
             };
-        }
+        },
+        instrumentupdate(state, { payload }) {
+            let icon = state.instrumentData.icon;
+            if(!!payload.instrumentData.lastPrice){
+                if(state.instrumentData.lastPrice > payload.instrumentData.lastPrice){
+                    icon = "arrow-down"
+                }else if(state.instrumentData.lastPrice < payload.instrumentData.lastPrice){
+                    icon = "arrow-up"
+                }else{
+                    icon = ""
+                }
+            }
+            
+            let instrumentData = {...state.instrumentData,...payload.instrumentData}
+            instrumentData.icon = icon
+            return {
+                ...state, instrumentData
+            };
+        },
     },
 
     subscriptions: {
