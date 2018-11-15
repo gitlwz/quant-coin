@@ -2,7 +2,7 @@
  * @Author: 刘文柱 
  * @Date: 2018-10-18 10:10:52 
  * @Last Modified by: 刘文柱
- * @Last Modified time: 2018-11-01 17:59:49
+ * @Last Modified time: 2018-11-15 18:12:18
  */
 import { isUrl } from '../utils/utils';
 
@@ -30,8 +30,26 @@ const menuData = [
         icon: 'issues-close',
         path: 'helpcenter',
 
-    }
+    },
 
+
+    
+    {
+        name: '账户',
+        icon: 'user',
+        path: 'user',
+        authority: 'guest',
+        children: [
+            {
+                name: '登录',
+                path: 'login',
+            },
+            {
+                name: '注册',
+                path: 'register',
+            }
+        ],
+    },
 ];
 
 function formatter(data, parentPath = '/', parentAuthority) {

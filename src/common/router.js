@@ -2,7 +2,7 @@
  * @Author: 刘文柱 
  * @Date: 2018-10-18 10:15:16 
  * @Last Modified by: 刘文柱
- * @Last Modified time: 2018-11-02 09:43:27
+ * @Last Modified time: 2018-11-15 18:12:35
  */
 import React, { createElement } from 'react';
 import { Spin } from 'quant-ui';
@@ -134,6 +134,9 @@ export const getRouterData = app => {
         '/user/login': {
             component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
         },
+        '/user/register': {
+            component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
+        }
 
     };
     // Get name from ./menu.js or just set it in the router data.
