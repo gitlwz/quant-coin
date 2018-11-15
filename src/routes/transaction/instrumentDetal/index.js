@@ -3,9 +3,6 @@ import { Icon, Spin } from 'quant-ui';
 import "./index.less";
 import { connect } from 'dva';
 class Index extends Component {
-    constructor(props) {
-        super(props)
-    }
     componentWillMount = () => {
         // const { dispatch } = this.props;
         // dispatch({

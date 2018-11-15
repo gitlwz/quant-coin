@@ -100,25 +100,25 @@ class Index extends Component {
                 return <TotalRight item={l} />
                 break;
             case "1":
-                return <Kline item={l} />
+                // return <Kline item={l} />
                 break;
             case "2":
-                return <RecentTrade item={l} />
+                // return <RecentTrade item={l} />
                 break;
             case "3":
-                return <InstrumentMarket item={l} />
+                // return <InstrumentMarket item={l} />
                 break;
             case "4":
-                return <InstrumentDetal item={l} />
+                // return <InstrumentDetal item={l} />
                 break;
             case "5":
                 return <OrderCommit item={l} />;
                 break;
             case "6":
-                return <OrderList item={l} />
+                // return <OrderList item={l} />
                 break;
             case "7":
-                return <Depthchart item={l} />
+                // return <Depthchart item={l} />
                 break;
             case "8":
                 return <UserOrder item={l} />
@@ -128,6 +128,8 @@ class Index extends Component {
                 break;
             case "10":
                 return <PositionHold item={l} />
+                break;
+            default:
                 break;
         }
     }
